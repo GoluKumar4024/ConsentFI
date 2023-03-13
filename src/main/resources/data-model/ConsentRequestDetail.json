@@ -1,0 +1,78 @@
+[
+  {
+    "_id": "9a1a18e2-536b-48b1-a53c-b9a9cd7b06c6",
+    "requestAlias": "Some Unique Alias",
+    "customer": {
+      "userId": "xxxx@yy.mail.com",
+      "accountAgg": "OneMoney",
+      "mobileNo": "8678983711"
+    },
+    "consentReq": {
+      "ver": "1.1.2",
+      "timestamp": "2023-03-10T00:00:00.000Z",
+      "txnid": "e78fda9c-1a86-405d-b241-d24cf3abf9ab",
+      "ConsentDetail": {
+        "consentStart": "2023-03-10T00:00:00.000Z",
+        "consentExpiry": "2023-06-01T00:00:00.000Z",
+        "consentMode": "STORE",
+        "fetchType": "PERIODIC",
+        "consentTypes": [
+          "TRANSACTIONS",
+          "PROFILE",
+          "SUMMARY"
+        ],
+        "fiTypes": [
+          "DEPOSIT",
+          "GST_GSTR1"
+        ],
+        "DataConsumer": {
+          "id": "GOL0134"
+        },
+        "Customer": {
+          "id": "8578983711@onemoney"
+        },
+        "Purpose": {
+          "code": "104",
+          "refUri": "https://api.rebit.org.in/aa/purpose/104.xml",
+          "text": "Account Query and Monitoring",
+          "Category": {
+            "type": "string"
+          }
+        },
+        "FIDataRange": {
+          "from": "2022-12-01T00:00:00.000Z",
+          "to": "2023-03-10T00:00:00.000Z"
+        },
+        "DataLife": {
+          "unit": "MONTH",
+          "value": 6
+        },
+        "Frequency": {
+          "unit": "HOUR",
+          "value": 1
+        },
+        "DataFilter": [
+          {
+            "type": "TRANSACTIONAMOUNT",
+            "operator": ">=",
+            "value": "20000"
+          }
+        ]
+      }
+    },
+    "consentResp": {
+      "ver": "1.1.2",
+      "timestamp": "2023-03-10T03:56:20.090Z",
+      "txnid": "1c54f3ae-6ddb-4d08-a337-9a21d8b7642a",
+      "Customer": {
+        "id": "8578983711@onemoney"
+      },
+      "ConsentHandle": "98b38207-4054-4ac3-a3a6-f9eb9405e27d"
+    },
+    "consentHandleStatus": {
+      "id": null,
+      "status": "PENDING"
+    },
+    "errorInfo": null
+  }
+]

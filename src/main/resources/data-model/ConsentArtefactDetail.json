@@ -1,0 +1,126 @@
+[
+  {
+    "_id": "b29849f5-297f-48ff-9c9e-4031afb657890",
+    "requestId": null,
+    "consentHandleId": null,
+    "consentId": "9849f5-297f-48ff-9c9e-4031afb657890",
+    "consentArtefact": {
+      "ver": "1.1.2",
+      "txnid": "b29849f5-297f-48ff-9c9e-4031afb65478",
+      "consentId": "1ce3e3d7-ab12-4347-b359-c471b798ff14",
+      "status": "ACTIVE",
+      "createTimestamp": "2023-03-10T04:04:40.296Z",
+      "ConsentUse": {
+        "logUri": "NA",
+        "count": 0,
+        "lastUseDateTime": "2023-03-10T04:04:40.296Z"
+      },
+      "ConsentDetail": {
+        "consentStart": "2023-03-10T03:56:18.481Z",
+        "consentExpiry": "2023-06-01T00:00:00.000Z",
+        "consentMode": "STORE",
+        "fetchType": "PERIODIC",
+        "consentTypes": [
+          "TRANSACTIONS",
+          "PROFILE",
+          "SUMMARY"
+        ],
+        "fiTypes": [
+          "DEPOSIT",
+          "GST_GSTR1"
+        ],
+        "DataConsumer": {
+          "id": "GOL0134",
+          "type": "FIU"
+        },
+        "DataProvider": {
+          "id": "onemoney",
+          "type": "AA"
+        },
+        "Customer": {
+          "id": "8578983711@onemoney"
+        },
+        "Accounts": [
+          {
+            "fiType": "DEPOSIT",
+            "fipId": "finsharebank",
+            "accType": "SAVINGS",
+            "linkRefNumber": "3c3ed30c-255a-414a-931d-bad0c7086840",
+            "maskedAccNumber": "XXXXXXXX1100"
+          },
+          {
+            "fiType": "DEPOSIT",
+            "fipId": "finsharebank",
+            "accType": "CURRENT",
+            "linkRefNumber": "93ec2f45-8aa9-45d2-bbc9-4e5415613740",
+            "maskedAccNumber": "XXXXXXXX1108"
+          },
+          {
+            "fiType": "DEPOSIT",
+            "fipId": "finsharebank",
+            "accType": "SAVINGS",
+            "linkRefNumber": "a8895342-56d5-4831-9e23-cfe9c2bb8bcf",
+            "maskedAccNumber": "XXXXXXXX1109"
+          },
+          {
+            "fiType": "DEPOSIT",
+            "fipId": "finsharebank",
+            "accType": "SAVINGS",
+            "linkRefNumber": "e6cb0f16-8fc1-4c2d-9ca6-2716a71d8113",
+            "maskedAccNumber": "XXXXXXXXX1010"
+          },
+          {
+            "fiType": "DEPOSIT",
+            "fipId": "finsharebank",
+            "accType": "SAVINGS",
+            "linkRefNumber": "05d9bcb3-49d5-461d-99fd-bc950cd90f9e",
+            "maskedAccNumber": "XXXXXXXXX1011"
+          },
+          {
+            "fiType": "DEPOSIT",
+            "fipId": "finsharebank",
+            "accType": "CURRENT",
+            "linkRefNumber": "6175236a-33b6-4987-8d09-81dd1fbb566c",
+            "maskedAccNumber": "XXXXXXXXX1012"
+          },
+          {
+            "fiType": "GST_GSTR1",
+            "fipId": "finsharebank",
+            "accType": "GSTIN",
+            "linkRefNumber": "f207f98e-75cd-47a0-b042-9d88b58cd390",
+            "maskedAccNumber": "XXXXXXXX1105"
+          }
+        ],
+        "Purpose": {
+          "code": "104",
+          "refUri": "https://api.rebit.org.in/aa/purpose/104.xml",
+          "text": "Account Query and Monitoring",
+          "Category": {
+            "type": "string"
+          }
+        },
+        "FIDataRange": {
+          "from": "2022-12-01T00:00:00.000Z",
+          "to": "2023-03-10T03:56:18.481Z"
+        },
+        "DataLife": {
+          "unit": "MONTH",
+          "value": 6
+        },
+        "Frequency": {
+          "unit": "HOUR",
+          "value": 1
+        },
+        "DataFilter": [
+          {
+            "type": "TRANSACTIONAMOUNT",
+            "operator": ">=",
+            "value": "20000"
+          }
+        ]
+      },
+      "consentDetailDigitalSignature": "eyJhbGciOiJSUzI1NiIsImNyaXQiOlsiYjY0Il0sImtpZCI6ImFlN2Y4YzQwLTdmZWUtMTFlYS05MGE0LTUxMjg0MzNhNTE4YSIsImI2NCI6dHJ1ZX0.eyJjb25zZW50U3RhcnQiOiIyMDIzLTAzLTEwVDAzOjU2OjE4LjQ4MVoiLCJjb25zZW50RXhwaXJ5IjoiMjAyMy0wNi0wMVQwMDowMDowMC4wMDBaIiwiY29uc2VudE1vZGUiOiJTVE9SRSIsImZldGNoVHlwZSI6IlBFUklPRElDIiwiY29uc2VudFR5cGVzIjpbIlRSQU5TQUNUSU9OUyIsIlBST0ZJTEUiLCJTVU1NQVJZIl0sImZpVHlwZXMiOlsiREVQT1NJVCIsIkdTVF9HU1RSMSJdLCJEYXRhQ29uc3VtZXIiOnsiaWQiOiJHT0wwMTM0IiwidHlwZSI6IkZJVSJ9LCJEYXRhUHJvdmlkZXIiOnsiaWQiOiJvbmVtb25leSIsInR5cGUiOiJBQSJ9LCJDdXN0b21lciI6eyJpZCI6Ijg1Nzg5ODM3MTFAb25lbW9uZXkifSwiQWNjb3VudHMiOlt7ImZpVHlwZSI6IkRFUE9TSVQiLCJmaXBJZCI6ImZpbnNoYXJlYmFuayIsImFjY1R5cGUiOiJTQVZJTkdTIiwibGlua1JlZk51bWJlciI6IjNjM2VkMzBjLTI1NWEtNDE0YS05MzFkLWJhZDBjNzA4Njg0MCIsIm1hc2tlZEFjY051bWJlciI6IlhYWFhYWFhYMTEwMCJ9LHsiZmlUeXBlIjoiREVQT1NJVCIsImZpcElkIjoiZmluc2hhcmViYW5rIiwiYWNjVHlwZSI6IkNVUlJFTlQiLCJsaW5rUmVmTnVtYmVyIjoiOTNlYzJmNDUtOGFhOS00NWQyLWJiYzktNGU1NDE1NjEzNzQwIiwibWFza2VkQWNjTnVtYmVyIjoiWFhYWFhYWFgxMTA4In0seyJmaVR5cGUiOiJERVBPU0lUIiwiZmlwSWQiOiJmaW5zaGFyZWJhbmsiLCJhY2NUeXBlIjoiU0FWSU5HUyIsImxpbmtSZWZOdW1iZXIiOiJhODg5NTM0Mi01NmQ1LTQ4MzEtOWUyMy1jZmU5YzJiYjhiY2YiLCJtYXNrZWRBY2NOdW1iZXIiOiJYWFhYWFhYWDExMDkifSx7ImZpVHlwZSI6IkRFUE9TSVQiLCJmaXBJZCI6ImZpbnNoYXJlYmFuayIsImFjY1R5cGUiOiJTQVZJTkdTIiwibGlua1JlZk51bWJlciI6ImU2Y2IwZjE2LThmYzEtNGMyZC05Y2E2LTI3MTZhNzFkODExMyIsIm1hc2tlZEFjY051bWJlciI6IlhYWFhYWFhYWDEwMTAifSx7ImZpVHlwZSI6IkRFUE9TSVQiLCJmaXBJZCI6ImZpbnNoYXJlYmFuayIsImFjY1R5cGUiOiJTQVZJTkdTIiwibGlua1JlZk51bWJlciI6IjA1ZDliY2IzLTQ5ZDUtNDYxZC05OWZkLWJjOTUwY2Q5MGY5ZSIsIm1hc2tlZEFjY051bWJlciI6IlhYWFhYWFhYWDEwMTEifSx7ImZpVHlwZSI6IkRFUE9TSVQiLCJmaXBJZCI6ImZpbnNoYXJlYmFuayIsImFjY1R5cGUiOiJDVVJSRU5UIiwibGlua1JlZk51bWJlciI6IjYxNzUyMzZhLTMzYjYtNDk4Ny04ZDA5LTgxZGQxZmJiNTY2YyIsIm1hc2tlZEFjY051bWJlciI6IlhYWFhYWFhYWDEwMTIifSx7ImZpVHlwZSI6IkdTVF9HU1RSMSIsImZpcElkIjoiZmluc2hhcmViYW5rIiwiYWNjVHlwZSI6IkdTVElOIiwibGlua1JlZk51bWJlciI6ImYyMDdmOThlLTc1Y2QtNDdhMC1iMDQyLTlkODhiNThjZDM5MCIsIm1hc2tlZEFjY051bWJlciI6IlhYWFhYWFhYMTEwNSJ9XSwiUHVycG9zZSI6eyJjb2RlIjoiMTA0IiwicmVmVXJpIjoiaHR0cHM6Ly9hcGkucmViaXQub3JnLmluL2FhL3B1cnBvc2UvMTA0LnhtbCIsInRleHQiOiJBY2NvdW50IFF1ZXJ5IGFuZCBNb25pdG9yaW5nIiwiQ2F0ZWdvcnkiOnsidHlwZSI6InN0cmluZyJ9fSwiRklEYXRhUmFuZ2UiOnsiZnJvbSI6IjIwMjItMTItMDFUMDA6MDA6MDAuMDAwWiIsInRvIjoiMjAyMy0wMy0xMFQwMzo1NjoxOC40ODFaIn0sIkRhdGFMaWZlIjp7InVuaXQiOiJNT05USCIsInZhbHVlIjo2fSwiRnJlcXVlbmN5Ijp7InVuaXQiOiJIT1VSIiwidmFsdWUiOjF9LCJEYXRhRmlsdGVyIjpbeyJ0eXBlIjoiVFJBTlNBQ1RJT05BTU9VTlQiLCJvcGVyYXRvciI6Ij49IiwidmFsdWUiOiIyMDAwMCJ9XX0.KnMJss4dbl2XCeDVssv3gynGdwek2KrWWB4A3lQuX8OOa3nVryB03DDnZmzy0qAK7LyGsadcrkbvcV9mfWGHXIZe6B60cruMb905Gaw3MUwDzZkpb_CtCV9YRBLarf-7W12Q-A1VEx171gv4OPsX1srIzPLZeR3kywV74dx7bCax_wx7DUOjhyPMT6j-KWYAX85zCMcDyMAFy_7hC7Pu4Rp4rFyHRWvXLcluHzsPyYMHTt_-8T6rI729WwntSHV8QLbRPlrluKgvWk3Oro-4Y7jFfelVLWiJ9ftCepO325XW6yjasENNBl79RMs4JD0ymwQNbeohJWXgF-_9BZDH9w"
+    },
+    "errorInfo": null
+  }
+]

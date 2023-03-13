@@ -1,0 +1,32 @@
+package com.technocrats.aa.model;
+
+import com.technocrats.aa.dtos.ErrorInfo;
+import com.technocrats.aa.dtos.FIFetchResp;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Document(value = "FIFetchDetail")
+public class FIFetchDetail {
+
+    @Id
+    private String id;
+
+    private String requestId;
+
+    private String consentId;
+
+    private String sessionId;
+
+    private FIFetchResp data;
+
+    private ErrorInfo errorInfo;
+
+
+}

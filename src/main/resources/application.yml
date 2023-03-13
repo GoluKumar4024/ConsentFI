@@ -1,0 +1,9 @@
+server:
+  servlet:
+    context-path: /aa-svc
+  port: 9092
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://${user}:${pwd}@ac-nuojl4c-shard-00-00.obch3ej.mongodb.net:27017,ac-nuojl4c-shard-00-01.obch3ej.mongodb.net:27017,ac-nuojl4c-shard-00-02.obch3ej.mongodb.net:27017/iCreditDB?ssl=true&authSource=admin&retryWrites=true

@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "UUID {unique for each data request made}",
+    "consentId": "UUID {the consent id for which data is being requested}",
+    "requestId": "The request id under which the request is made",
+    "localKeyMaterialWithNonce": {
+      "cryptoAlg": "ECDH",
+      "curve": "Curve25519",
+      "params": "",
+      "DHPublicKey": {
+        "expiry": "2023-03-11T04:44:42.687Z",
+        "Parameters": "",
+        "KeyValue": "-----BEGIN PUBLIC KEY-----MIIBMTCB6gYHKoZIzj0CATCB3gIBATArBgcqhkjOPQEBAiB/////////////////////////////////////////7TBEBCAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqYSRShRAQge0Je0Je0Je0Je0Je0Je0Je0Je0Je0Je0JgtenHcQyGQEQQQqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq0kWiCuGaG4oIa04B7dLHdI0UySPU1+bXxhsinpxaJ+ztPZAiAQAAAAAAAAAAAAAAAAAAAAFN753qL3nNZYEmMaXPXT7QIBCANCAAQTl9Y3/FzbJNNq42f7fWJVfed/TppEzSiWedzjJ5JbewBSLLt4Gl+eCy3Q50Wi198Lrzk+mItmJugymgVBbPdl-----END PUBLIC KEY-----"
+      },
+      "Nonce": "0CATCB3gIBATArBgcqhkjOPQEBAiB/////////////////"
+    },
+    "localPrivateKey": "-----BEGIN PRIVATE KEY-----MIICRwIBADCB6gYHKoZIzj0CATCB3gIBATArBgcqhkjOPQEBAiB/////////////////////////////////////////7TBEBCAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqYSRShRAQge0Je0Je0Je0Je0Je0Je0Je0Je0Je0Je0JgtenHcQyGQEQQQqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq0kWiCuGaG4oIa04B7dLHdI0UySPU1+bXxhsinpxaJ+ztPZAiAQAAAAAAAAAAAAAAAAAAAAFN753qL3nNZYEmMaXPXT7QIBCASCAVMwggFPAgEBBCAD3dFnxG9F1oeWA8HwwvcghHlG7WMtcRZmPEuJSnPP06CB4TCB3gIBATArBgcqhkjOPQEBAiB/////////////////////////////////////////7TBEBCAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqYSRShRAQge0Je0Je0Je0Je0Je0Je0Je0Je0Je0Je0JgtenHcQyGQEQQQqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq0kWiCuGaG4oIa04B7dLHdI0UySPU1+bXxhsinpxaJ+ztPZAiAQAAAAAAAAAAAAAAAAAAAAFN753qL3nNZYEmMaXPXT7QIBCKFEA0IABBOX1jf8XNsk02rjZ/t9YlV9539OmkTNKJZ53OMnklt7AFIsu3gaX54LLdDnRaLX3wuvOT6Yi2Ym6DKaBUFs92U=-----END PRIVATE KEY-----",
+    "sessionDetails": {
+      "ver": "1.1.2",
+      "timestamp": "2023-03-11T04:44:42.687Z",
+      "txnid": "94d37330-c752-4615-8631-00afefe0be77",
+      "consentId": "dfd24949-c29d-4d29-947c-798708d678b3",
+      "sessionId": "6807950f-b34c-4a0c-a8ae-7ec289868e0a"
+    },
+    "errorInfo": null
+  }
+]
