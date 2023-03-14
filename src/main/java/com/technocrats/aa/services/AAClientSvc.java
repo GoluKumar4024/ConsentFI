@@ -58,4 +58,12 @@ public class AAClientSvc {
                 .bodyToMono(ConsentResp.class)
                 .block();
     }
+
+    public ConsentHandleResp fetchStatusForHandle(String handle) {
+        return webClientAA.get()
+                .uri(AaConstants.AA_CONSENT_HANDLE_URI + "/" + handle)
+                .retrieve()
+                .bodyToMono(ConsentHandleResp.class)
+                .block();
+    }
 }

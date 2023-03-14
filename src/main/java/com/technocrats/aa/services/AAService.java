@@ -1,5 +1,6 @@
 package com.technocrats.aa.services;
 
+import com.technocrats.aa.constants.AaConstants;
 import com.technocrats.aa.dtos.ConsentResp;
 import com.technocrats.aa.dtos.UiConsentReq;
 import com.technocrats.aa.model.ConsentArtefactDetail;
@@ -43,8 +44,15 @@ public class AAService {
     public void processConsent(String consentId) {
         log.info("Processing of Consent Started for consentId: {}", consentId);
 
-        // set requestId, consentHandle null for now.
+        // check if successfully fetched artefact already exists.
+        if (consentArtefactDetailRepo.findByConsentId(consentId) != null) {
+            log.warn("The Valid Consent Artefact Already Exists for consentId: {}", consentId);
+            return;
+        }
+
+
         ConsentArtefactDetail consentArtefactDetail = new ConsentArtefactDetail();
+        // set requestId, consentHandle null for now.
         consentArtefactDetail.setRequestId(null);
         consentArtefactDetail.setConsentHandleId(null);
         consentArtefactDetail.setConsentId(consentId);
@@ -65,10 +73,11 @@ public class AAService {
             // String purposeCode = consentArtefactDetail.getConsentArtefact().getConsentDetail().getPurpose().getCode();
             String fetchType = consentArtefactDetail.getConsentArtefact().getConsentDetail().getFetchType();
             log.info("The Fetch Type for Consent Id: {} is {}", consentId, fetchType);
-            if (fetchType.equals("ONETIME")) {     // means one time financial reporting.
+            if (fetchType.equals(AaConstants.ONETIME_FETCH_TYPE)) {     // means one time financial reporting.
                 createSession(consentId);
             }
         }
+
         log.info("Processing of Consent Completed for consentId: {}", consentId);
     }
 
