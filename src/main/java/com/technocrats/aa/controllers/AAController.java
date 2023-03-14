@@ -1,5 +1,7 @@
 package com.technocrats.aa.controllers;
 
+import com.technocrats.aa.dtos.ConsentResp;
+import com.technocrats.aa.dtos.UiConsentReq;
 import com.technocrats.aa.services.AAService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +30,12 @@ public class AAController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @PostMapping("/RequestConsent")
-//    public ResponseEntity<Void> sendConsentRequest( ) {
-//
-//    }
+    @PostMapping("/RequestConsent")
+    public ConsentResp sendConsentRequest(@RequestBody UiConsentReq uiConsentReq) {
+        log.info("The Consent Creation Request received: {}", uiConsentReq);
+        return aaService.createConsentRequest(uiConsentReq);
+        // return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 }

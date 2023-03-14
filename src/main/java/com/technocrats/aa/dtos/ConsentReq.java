@@ -8,23 +8,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConsentReq {
 
-    @JsonProperty("ver")
     private String ver;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date timestamp;
 
-    @JsonProperty("txnid")
     private String txnid;
 
-    @JsonProperty("ConsentDetail")
-    private ConsentDetail ConsentDetail;
-
+    @JsonProperty(value = "ConsentDetail")
+    private ConsentReqValues ConsentDetail;
 
 }

@@ -11,5 +11,5 @@ public class Frequency {
 
     private String unit;
 
-    private String value;
+    private Integer value;
 }

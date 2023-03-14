@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DataLife {
-
-    private String unit;
-
-    private Integer value;
+public class DataConsumerFIU {
+    private String id;
 }

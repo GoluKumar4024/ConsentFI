@@ -1,5 +1,6 @@
 package com.technocrats.aa.dtos;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,14 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConsentDetail {
+public class ConsentReqValues {
+
+//    @Data
+//    @AllArgsConstructor
+//    @NoArgsConstructor
+//    public static class DataConsumerFIU {
+//        private String id;
+//    }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date consentStart;
@@ -20,39 +28,36 @@ public class ConsentDetail {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date consentExpiry;
 
+    @JsonProperty("consentMode")
     private String consentMode;
 
+    @JsonProperty("fetchType")
     private String fetchType;
 
+    @JsonProperty("consentTypes")
     private List<String> consentTypes;
 
+    @JsonProperty("fiTypes")
     private List<String> fiTypes;
 
-    @JsonProperty(value = "DataConsumer")
-    private DataConsumer DataConsumer;
+    @JsonProperty("DataConsumer")
+    private DataConsumerFIU DataConsumer;
 
-    @JsonProperty(value = "DataProvider")
-    private DataProvider DataProvider;
-
-    @JsonProperty(value = "Customer")
+    @JsonProperty("Customer")
     private Customer Customer;
 
-    @JsonProperty(value = "Accounts")
-    private List<AccountData> Accounts;
-
-    @JsonProperty(value = "Purpose")
+    @JsonProperty("Purpose")
     private Purpose Purpose;
 
-    @JsonProperty(value = "FIDataRange")
+    @JsonProperty("FIDataRange")
     private FIDataRange FIDataRange;
 
-    @JsonProperty(value = "DataLife")
+    @JsonProperty("DataLife")
     private DataLife DataLife;
 
-    @JsonProperty(value = "Frequency")
+    @JsonProperty("Frequency")
     private Frequency Frequency;
 
-    @JsonProperty(value = "DataFilter")
-    private List<com.technocrats.aa.dtos.DataFilter> DataFilter;
-
+    @JsonProperty("DataFilter")
+    private List<DataFilter> DataFilter;
 }
