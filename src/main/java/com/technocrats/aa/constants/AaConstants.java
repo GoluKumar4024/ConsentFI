@@ -18,6 +18,7 @@ public class AaConstants {
 
     public static final String AA_BASE_URL = "https://api-sandbox.onemoney.in/aa";
     public static final String AA_CONSENT_ARTEFACT_URI = "/Consent";
+    public static final String AA_CONSENT_HANDLE_URI = "/Consent/handle";
     public static final String AA_HEART_BEAT_URI = "/Heartbeat";
     public static final String AA_FI_DATA_FETCH_REQ_URI = "/FI/request";
     public static final String AA_FI_DATA_FETCH_FOR_SESSION_URI = "/FI/fetch";

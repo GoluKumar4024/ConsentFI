@@ -3,6 +3,7 @@ package com.technocrats.aa.services.rules.impl;
 import com.technocrats.aa.dtos.ConsentArtefact;
 import com.technocrats.aa.model.ConsentArtefactDetail;
 import com.technocrats.aa.dtos.ErrorInfo;
+import com.technocrats.aa.repo.ConsentArtefactDetailRepo;
 import com.technocrats.aa.services.AAClientSvc;
 import com.technocrats.aa.services.rules.IProcessGeneratedConsent;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class FetchConsentArtefact implements IProcessGeneratedConsent {
 
     private final AAClientSvc aaClientSvc;
+    private final ConsentArtefactDetailRepo consentArtefactDetailRepo;
 
     @Override
     public Integer getExecutionSeq() {

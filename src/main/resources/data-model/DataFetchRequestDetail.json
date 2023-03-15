@@ -1,8 +1,8 @@
 [
   {
     "_id": "UUID {unique for each data request made}",
-    "consentId": "UUID {the consent id for which data is being requested}",
-    "requestId": "The request id under which the request is made",
+    "consentId": null,
+    "requestId": null,
     "localKeyMaterialWithNonce": {
       "cryptoAlg": "ECDH",
       "curve": "Curve25519",
