@@ -2,20 +2,18 @@ package com.technocrats.aa.controllers;
 
 import com.technocrats.aa.dtos.ConsentNotification;
 import com.technocrats.aa.dtos.ConsentNotificationResp;
-import com.technocrats.aa.dtos.ConsentResp;
-import com.technocrats.aa.dtos.FINotificationResp;
 import com.technocrats.aa.dtos.FINotification;
-import com.technocrats.aa.dtos.UiConsentReq;
+import com.technocrats.aa.dtos.FINotificationResp;
 import com.technocrats.aa.model.ConsentNotificationDetail;
 import com.technocrats.aa.model.FINotificationDetail;
+import com.technocrats.aa.repo.ConsentNotificationDetailRepo;
 import com.technocrats.aa.repo.FINotificationDetailRepo;
 import com.technocrats.aa.services.AAService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import com.technocrats.aa.repo.ConsentNotificationDetailRepo;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
