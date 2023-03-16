@@ -27,30 +27,28 @@ public class AAController {
     private final FINotificationDetailRepo fiNotificationDetailRepo;
 
     @PostMapping("/Consent/Notification")
-    public ConsentNotificationResp processConsent(@RequestBody ConsentNotification consentNotification) {
-        log.info("The Consent Notification Received: {}", consentNotification);
-        logConsentNotificationToDB(consentNotification);
-        String consentId = consentNotification.getConsentStatusNotification().getConsentId();
-        aaService.processConsent(consentId);
-        ConsentNotificationResp response = new ConsentNotificationResp(consentNotification.getVer(), consentNotification.getTimestamp(), consentNotification.getTxnid(), "OK");
-        return response;
+    public ConsentNotificationResp processConsentNotification(@RequestBody ConsentNotification consentNotification) {
+        logConsentNotification(consentNotification);
+        aaService.processConsentNotification(consentNotification);
+        return new ConsentNotificationResp(consentNotification.getVer(), consentNotification.getTimestamp(), consentNotification.getTxnid(), "OK");
     }
 
     @PostMapping("/FI/Notification")
     public FINotificationResp processSession(@RequestBody FINotification fiNotification) {
-        log.info("The Session Notification Received: {}", fiNotification);
-        logFINotificationToDB(fiNotification);
+        logFINotification(fiNotification);
         String sessionId = fiNotification.getFIStatusNotification().getSessionId();
         aaService.fetchFIData(sessionId);
         FINotificationResp response = new FINotificationResp(fiNotification.getVer(), fiNotification.getTimestamp(), fiNotification.getTxnid(), "OK");
         return response;
     }
 
-    public void logConsentNotificationToDB(ConsentNotification consentNotification){
+    public void logConsentNotification(ConsentNotification consentNotification){
+        log.info("The Consent Notification Received: {}", consentNotification);
         consentNotificationDetailRepo.save(new ConsentNotificationDetail(UUID.randomUUID().toString(), consentNotification));
     }
 
-    public void logFINotificationToDB(FINotification fiNotification){
+    public void logFINotification(FINotification fiNotification){
+        log.info("The Session Notification Received: {}", fiNotification);
         fiNotificationDetailRepo.save(new FINotificationDetail(UUID.randomUUID().toString(), fiNotification));
     }
 }

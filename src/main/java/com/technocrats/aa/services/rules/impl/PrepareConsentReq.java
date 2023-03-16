@@ -35,12 +35,12 @@ public class PrepareConsentReq implements IProcessConsentRequest {
             Date dateNow = new Date();
             consentReq.setTimestamp(dateNow);
             consentReq.setTxnid(UUID.randomUUID().toString());
-            ConsentReqValues consentReqValues = consentReq.getConsentDetail();
-            consentReqValues.setConsentStart(dateNow);
-            consentReqValues.setConsentExpiry(DateTimeUtils.dateXMonthsLater(3, dateNow));
-            consentReqValues.setCustomer(new Customer(aaId));
-            consentReqValues.setDataConsumer(new DataConsumerFIU("GOL0134"));
-            consentReqValues.setFIDataRange(new FIDataRange(DateTimeUtils.dateXMonthsLater(-3, dateNow), dateNow));
+            ConsentReq.Detail consentDetail = consentReq.getConsentDetail();
+            consentDetail.setConsentStart(dateNow);
+            consentDetail.setConsentExpiry(DateTimeUtils.dateXMonthsLater(3, dateNow));
+            consentDetail.setCustomer(new Customer(aaId));
+            consentDetail.setDataConsumer(new DataConsumerFIU("GOL0134"));
+            consentDetail.setFIDataRange(new FIDataRange(DateTimeUtils.dateXMonthsLater(-3, dateNow), dateNow));
             consentRequestDetail.setConsentReq(consentReq);
             return true;
         } catch (Exception ex) {

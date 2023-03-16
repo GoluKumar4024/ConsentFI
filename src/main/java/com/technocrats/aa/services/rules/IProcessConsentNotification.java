@@ -1,10 +1,11 @@
 package com.technocrats.aa.services.rules;
 
-import com.technocrats.aa.model.ConsentArtefactDetail;
+import com.technocrats.aa.model.ConsentDetail;
 
-public interface IProcessGeneratedConsent {
+public interface IProcessConsentNotification {
     Integer getExecutionSeq();
-    Boolean execute(ConsentArtefactDetail consentArtefactDetail);
+
+    Boolean execute(ConsentDetail consentArtefactDetail);
 }
 
 /**

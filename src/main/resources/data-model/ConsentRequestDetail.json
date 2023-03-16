@@ -1,23 +1,14 @@
 [
   {
     "_id": "9a1a18e2-536b-48b1-a53c-b9a9cd7b06c6",
-    "requestAlias": "Some Unique Alias",
-    "createdDate": "2023-03-10T00:00:00.000Z",
-    "uiConsentReq": {
-      "email": "str.golu@gmail.com",
-      "name": "Golu Kumar",
-      "aa": {
-        "id": "8578983711@onemoney",
-        "name": "Onemoney"
-      },
-      "purpose": {
-        "code": "104",
-        "refUri": "https://api.rebit.org.in/aa/purpose/104.xml",
-        "text": "Explicit consent for monitoring of the accounts",
-        "Category": {
-          "type": "string"
-        }
-      }
+    "requestSrcRef": {
+      "srcName": "UI-Svc",
+      "refId": "9a1a18e2-536b-48b1-a53c-b9a9cd7b06c6"
+    },
+    "consentHandleId": "98b38207-4054-4ac3-a3a6-f9eb9405e27d",
+    "accAgg": {
+      "type": "AA",
+      "id": "OneMoney"
     },
     "consentReq": {
       "ver": "1.1.2",
@@ -82,9 +73,11 @@
       "ConsentHandle": "98b38207-4054-4ac3-a3a6-f9eb9405e27d"
     },
     "consentHandleStatus": {
-      "id": null,
+      "consentId": null,
       "status": "PENDING"
     },
+    "createdDate": "2023-03-10T00:00:00.000Z",
+    "lastUpdatedDate": "2023-03-10T00:00:00.000Z",
     "errorInfo": null
   }
 ]

@@ -3,7 +3,7 @@ package com.technocrats.aa.services.rules.impl;
 import com.technocrats.aa.dtos.*;
 import com.technocrats.aa.model.ConsentArtefactDetail;
 import com.technocrats.aa.model.DataFetchRequestDetail;
-import com.technocrats.aa.repo.ConsentArtefactDetailRepo;
+import com.technocrats.aa.repo.ConsentDetailRepo;
 import com.technocrats.aa.services.AAClientSvc;
 import com.technocrats.aa.services.rules.ICreateSessionForConsent;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ import java.util.UUID;
 public class SendFIDataRequest implements ICreateSessionForConsent {
 
     private final AAClientSvc aaClientSvc;
-    private final ConsentArtefactDetailRepo consentArtefactDetailRepo;
+    private final ConsentDetailRepo consentDetailRepo;
 
     @Override
     public Integer getExecutionSeq() {
@@ -30,7 +30,7 @@ public class SendFIDataRequest implements ICreateSessionForConsent {
     public Boolean execute(DataFetchRequestDetail dataFetchRequestDetail) {
         try {
             String consentId = dataFetchRequestDetail.getConsentId();
-            ConsentArtefactDetail consentArtefactDetail = consentArtefactDetailRepo.findByConsentId(consentId);
+            ConsentArtefactDetail consentArtefactDetail = consentDetailRepo.findByConsentId(consentId);
             ConsentArtefact consentArtefact = consentArtefactDetail.getConsentArtefact();
             Consent consent = new Consent(consentId, consentArtefact.getConsentDetailDigitalSignature());
             FIDataRange fiDataRange = consentArtefact.getConsentDetail().getFIDataRange();

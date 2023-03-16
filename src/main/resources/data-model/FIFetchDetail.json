@@ -4,6 +4,10 @@
     "requestId": null,
     "consentId": null,
     "sessionId": "94d37330-c752-4615-8631-00afefe0be89",
+    "accAgg": {
+      "type": "AA",
+      "name": "OneMoney"
+    },
     "data": {
       "ver": "1.1.2",
       "timestamp": "2023-02-14T07:32:58.093Z",

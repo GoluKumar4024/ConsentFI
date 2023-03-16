@@ -5,7 +5,7 @@ import com.technocrats.aa.dtos.ConsentHandleStatus;
 import com.technocrats.aa.model.ConsentArtefactDetail;
 import com.technocrats.aa.model.ConsentRequestDetail;
 import com.technocrats.aa.model.DataFetchRequestDetail;
-import com.technocrats.aa.repo.ConsentArtefactDetailRepo;
+import com.technocrats.aa.repo.ConsentDetailRepo;
 import com.technocrats.aa.repo.ConsentRequestDetailRepo;
 import com.technocrats.aa.repo.DataFetchRequestDetailRepo;
 import com.technocrats.aa.services.AAClientSvc;
@@ -22,7 +22,7 @@ import java.util.List;
 public class WatcherJobConfig {
 
     private final ConsentRequestDetailRepo consentRequestDetailRepo;
-    private final ConsentArtefactDetailRepo consentArtefactDetailRepo;
+    private final ConsentDetailRepo consentDetailRepo;
     private final DataFetchRequestDetailRepo dataFetchRequestDetailRepo;
     private final AAClientSvc aaClientSvc;
 
@@ -44,13 +44,13 @@ public class WatcherJobConfig {
 
     @Scheduled(fixedDelay = 1000)
     public void updateConsentArtefactWithRequestId() {
-        List<ConsentArtefactDetail> consentArtefactDetailList = consentArtefactDetailRepo.findAllArtefactsWithAbsentRequestAndHandle();
+        List<ConsentArtefactDetail> consentArtefactDetailList = consentDetailRepo.findAllArtefactsWithAbsentRequestAndHandle();
         for (ConsentArtefactDetail consentArtefactDetail : consentArtefactDetailList) {
             ConsentRequestDetail consentRequestDetail = consentRequestDetailRepo.findByConsentHandleStatusId(consentArtefactDetail.getConsentId());
             if (consentRequestDetail != null) {
                 consentArtefactDetail.setConsentHandleId(consentRequestDetail.getConsentResp().getConsentHandle());
                 consentArtefactDetail.setRequestId(consentRequestDetail.getId());
-                consentArtefactDetailRepo.save(consentArtefactDetail);
+                consentDetailRepo.save(consentArtefactDetail);
             }
         }
     }

@@ -1,0 +1,7 @@
+notification:
+ACTIVE: just fetch/refetch the consent artefact and this shouold be it
+READY: just fetch/refresh the consent artefact
+REVOKED: update status of that particular consent
+PAUSED: UPDATE STATUS
+REJECTED: update status
+

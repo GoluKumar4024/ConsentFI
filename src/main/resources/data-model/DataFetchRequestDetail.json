@@ -1,8 +1,12 @@
 [
   {
-    "_id": "UUID {unique for each data request made}",
-    "consentId": null,
+    "_id": "1c54f3ae-6ddb-4d08-a337-9a21d8b7642a",
     "requestId": null,
+    "consentId": "1c54f3ae-6ddb-4d08-a337-9a21d8b7642a",
+    "accAgg": {
+      "type": "AA",
+      "name": "OneMoney"
+    },
     "localKeyMaterialWithNonce": {
       "cryptoAlg": "ECDH",
       "curve": "Curve25519",
@@ -22,6 +26,8 @@
       "consentId": "dfd24949-c29d-4d29-947c-798708d678b3",
       "sessionId": "6807950f-b34c-4a0c-a8ae-7ec289868e0a"
     },
+    "createdDate": "2023-03-11T04:44:42.687Z",
+    "lastUpdatedDate": "2023-03-11T04:44:42.687Z",
     "errorInfo": null
   }
 ]

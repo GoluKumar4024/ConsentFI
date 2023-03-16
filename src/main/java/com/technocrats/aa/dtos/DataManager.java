@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Notifier {
+public class DataManager {
 
     private String type;
 
-    private String id;
-
+    private String name;
 }
