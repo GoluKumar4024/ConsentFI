@@ -1,5 +1,6 @@
 package com.technocrats.aa.model;
 
+import com.technocrats.aa.dtos.DataManager;
 import com.technocrats.aa.dtos.ErrorInfo;
 import com.technocrats.aa.dtos.KeyMaterialWithNonce;
 import com.technocrats.aa.dtos.SessionDetails;
@@ -18,9 +19,11 @@ public class DataFetchRequestDetail {
     @Id
     private String id;
 
+    private String requestId;
+
     private String consentId;
 
-    private String requestId;
+    private DataManager accAgg;
 
     private KeyMaterialWithNonce localKeyMaterialWithNonce;
 

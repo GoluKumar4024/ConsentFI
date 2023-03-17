@@ -71,8 +71,9 @@ public class AAService {
     public void createSession(ConsentDetail consentDetail) {
         log.info("Started Session Creation for Consent: {}", consentDetail.getConsentId());
         DataFetchRequestDetail dataFetchRequestDetail = new DataFetchRequestDetail();
-        dataFetchRequestDetail.setConsentId(consentDetail.getConsentId());
         dataFetchRequestDetail.setRequestId(null);
+        dataFetchRequestDetail.setConsentId(consentDetail.getConsentId());
+        dataFetchRequestDetail.setAccAgg(consentDetail.getDataManager());
         List<ICreateSessionForConsent> sortedSvcs = generateSessionForConsentSvc.stream().sorted(Comparator.comparingInt(ICreateSessionForConsent::getExecutionSeq)).collect(Collectors.toList());
         for (ICreateSessionForConsent svc : sortedSvcs) {
             Boolean result = svc.execute(dataFetchRequestDetail);
@@ -83,12 +84,15 @@ public class AAService {
         log.info("Completed Session Creation for Consent: {}", consentDetail.getConsentId());
     }
 
-    public void fetchFIData(String sessionId) {
-        log.info("Started FI Fetch for session: {}", sessionId);
+    public void fetchFIData(FINotification fiNotification) {
+        log.info("Started FI Fetch for Session: {}", fiNotification);
+        String sessionId = fiNotification.getFIStatusNotification().getSessionId();
+        DataManager dataManager = new DataManager(fiNotification.getNotifier().getType(), fiNotification.getNotifier().getId());
         FIFetchDetail fiFetchDetail = new FIFetchDetail();
         fiFetchDetail.setRequestId(null);
         fiFetchDetail.setConsentId(null);
         fiFetchDetail.setSessionId(sessionId);
+        fiFetchDetail.setAccAgg(dataManager);
         List<IProcessGeneratedSession> sortedSvcs = processGeneratedSessionSvc.stream().sorted(Comparator.comparingInt(IProcessGeneratedSession::getExecutionSeq)).collect(Collectors.toList());
         for (IProcessGeneratedSession svc : sortedSvcs) {
             Boolean result = svc.execute(fiFetchDetail);

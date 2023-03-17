@@ -2,7 +2,7 @@ package com.technocrats.aa.config;
 
 import com.technocrats.aa.dtos.ConsentHandleResp;
 import com.technocrats.aa.dtos.ConsentHandleStatus;
-import com.technocrats.aa.model.ConsentArtefactDetail;
+import com.technocrats.aa.model.ConsentDetail;
 import com.technocrats.aa.model.ConsentRequestDetail;
 import com.technocrats.aa.model.DataFetchRequestDetail;
 import com.technocrats.aa.repo.ConsentDetailRepo;
@@ -21,10 +21,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WatcherJobConfig {
 
-    private final ConsentRequestDetailRepo consentRequestDetailRepo;
-    private final ConsentDetailRepo consentDetailRepo;
-    private final DataFetchRequestDetailRepo dataFetchRequestDetailRepo;
     private final AAClientSvc aaClientSvc;
+    private final ConsentDetailRepo consentDetailRepo;
+    private final ConsentRequestDetailRepo consentRequestDetailRepo;
+    private final DataFetchRequestDetailRepo dataFetchRequestDetailRepo;
+
 
     @Scheduled(fixedDelay = 1000)
     public void updateConsentIdsForPendingConsentRequests() {
@@ -44,11 +45,10 @@ public class WatcherJobConfig {
 
     @Scheduled(fixedDelay = 1000)
     public void updateConsentArtefactWithRequestId() {
-        List<ConsentArtefactDetail> consentArtefactDetailList = consentDetailRepo.findAllArtefactsWithAbsentRequestAndHandle();
-        for (ConsentArtefactDetail consentArtefactDetail : consentArtefactDetailList) {
+        List<ConsentDetail> consentArtefactDetailList = consentDetailRepo.findAllArtefactsWithAbsentRequestId();
+        for (ConsentDetail consentArtefactDetail : consentArtefactDetailList) {
             ConsentRequestDetail consentRequestDetail = consentRequestDetailRepo.findByConsentHandleStatusId(consentArtefactDetail.getConsentId());
             if (consentRequestDetail != null) {
-                consentArtefactDetail.setConsentHandleId(consentRequestDetail.getConsentResp().getConsentHandle());
                 consentArtefactDetail.setRequestId(consentRequestDetail.getId());
                 consentDetailRepo.save(consentArtefactDetail);
             }

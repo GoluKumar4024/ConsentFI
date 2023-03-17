@@ -1,5 +1,6 @@
 package com.technocrats.aa.model;
 
+import com.technocrats.aa.dtos.DataManager;
 import com.technocrats.aa.dtos.ErrorInfo;
 import com.technocrats.aa.dtos.FIFetchResp;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,8 @@ public class FIFetchDetail {
     private String consentId;
 
     private String sessionId;
+
+    private DataManager accAgg;
 
     private FIFetchResp data;
 

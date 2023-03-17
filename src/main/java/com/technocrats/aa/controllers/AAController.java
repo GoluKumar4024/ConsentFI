@@ -37,17 +37,16 @@ public class AAController {
     public FINotificationResp processSession(@RequestBody FINotification fiNotification) {
         logFINotification(fiNotification);
         String sessionId = fiNotification.getFIStatusNotification().getSessionId();
-        aaService.fetchFIData(sessionId);
-        FINotificationResp response = new FINotificationResp(fiNotification.getVer(), fiNotification.getTimestamp(), fiNotification.getTxnid(), "OK");
-        return response;
+        aaService.fetchFIData(fiNotification);
+        return new FINotificationResp(fiNotification.getVer(), fiNotification.getTimestamp(), fiNotification.getTxnid(), "OK");
     }
 
-    public void logConsentNotification(ConsentNotification consentNotification){
+    public void logConsentNotification(ConsentNotification consentNotification) {
         log.info("The Consent Notification Received: {}", consentNotification);
         consentNotificationDetailRepo.save(new ConsentNotificationDetail(UUID.randomUUID().toString(), consentNotification));
     }
 
-    public void logFINotification(FINotification fiNotification){
+    public void logFINotification(FINotification fiNotification) {
         log.info("The Session Notification Received: {}", fiNotification);
         fiNotificationDetailRepo.save(new FINotificationDetail(UUID.randomUUID().toString(), fiNotification));
     }

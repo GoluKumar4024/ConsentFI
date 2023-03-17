@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FIFetchDetailRepo extends MongoRepository<FIFetchDetail, String> {
+
+    FIFetchDetail findBySessionIdAndAccAggName(String sessionId, String dataManagerName);
+
 }
