@@ -10,9 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
+@Document(value = "ConsentNotificationDetail")
 public class ConsentNotificationDetail {
+
     @Id
     private String id;
+
     private ConsentNotification consentNotification;
 }

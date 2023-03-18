@@ -8,18 +8,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UiConsentReq {
+public class UISvcConsentReq {
 
-    private String email;
-    private String name;
-    private AA aa;
-    private Purpose purpose;
-    private String requestAlias;
+    private String refId;
+
+    private DataManager accAgg;
+
+    private ConsentReq consentReq;
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class AA {
+    public static class AAProfile {
         private String id;
         private String name;
     }

@@ -19,19 +19,20 @@ public class SendConsentReq implements IProcessConsentRequest {
 
     @Override
     public Integer getExecutionSeq() {
-        return 2;
+        return 1;
     }
 
     @Override
     public Boolean execute(ConsentRequestDetail consentRequestDetail) {
         try {
-            ConsentResp consentResp = aaClientSvc.consentReqAaCall(consentRequestDetail.getConsentReq());
+            ConsentResp consentResp = aaClientSvc.consentReqAaCall(consentRequestDetail.getUiSvcConsentReq().getConsentReq());
             consentRequestDetail.setConsentResp(consentResp);
+            consentRequestDetail.setConsentHandleId(consentResp.getConsentHandle());
             consentRequestDetail.setConsentHandleStatus(new ConsentHandleStatus(null, "PENDING"));
             return true;
         } catch (Exception ex) {
-            log.error("Error in Sending Consent Req to AA: {}", ex.getMessage());
-            consentRequestDetail.setErrorInfo(new ErrorInfo("ERROR IN SENDCONSET REW", ex.getMessage()));
+            log.error("Error in Sending Consent Req to AA", ex);
+            consentRequestDetail.setErrorInfo(new ErrorInfo("ERROR_IN_SEND_CONSENT_REQ", ex.getMessage()));
             return false;
         }
 

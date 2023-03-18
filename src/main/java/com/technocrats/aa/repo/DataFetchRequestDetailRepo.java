@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DataFetchRequestDetailRepo extends MongoRepository<DataFetchRequestDetail,String> {
+public interface DataFetchRequestDetailRepo extends MongoRepository<DataFetchRequestDetail, String> {
+
+    @Query("{$and: [{'errorInfo': {$exists: false}}, {'sessionDetails.sessionId': {$eq: ?0}}]}")
     DataFetchRequestDetail findBySessionDetailsSessionId(String sessionId);
 
     @Query("{$and: [ {'errorInfo': {$exists: false}}, { $or: [{'consentId': {$exists: false}}, {'requestId': {$exists: false}}] } ]}")

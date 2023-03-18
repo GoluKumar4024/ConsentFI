@@ -19,19 +19,31 @@ public class ConsentRequestDetail {
     @Id
     private String id;
 
-    private String requestAlias;
+    private RequestSrcRef requestSrcRef;
+
+    private DataManager accAgg;
+
+    private UISvcConsentReq uiSvcConsentReq;
+
+    private ConsentResp consentResp;
+
+    private String consentHandleId;
+
+    private ConsentHandleStatus consentHandleStatus;
 
     @CreatedDate
     private Date createdDate;
 
-    private UiConsentReq uiConsentReq;
-
-    private ConsentReq consentReq;
-
-    private ConsentResp consentResp;
-
-    private ConsentHandleStatus consentHandleStatus;
-
     private ErrorInfo errorInfo;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class RequestSrcRef {
+
+        private String srcName;
+
+        private String refId;
+    }
 
 }

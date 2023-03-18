@@ -8,13 +8,12 @@ import java.util.List;
 
 public class AaConstants {
 
-//    public static final String ONEMONEY_API_VERSION = "1.1.2";
-//    public static final String STORE_CONSENT_MODE = "STORE";
-//    public static final String VIEW_CONSENT_MODE = "VIEW";
-//    public static final String ONETIME_FETCH_TYPE = "ONETIME";
-//    public static final String PERIODIC_FETCH_TYPE = "PERIODIC";
-//    public static final String MONITORING_PURPOSE = "104";
-//    public static final String ONETIME_PURPOSE = "105";
+    public static final String STORE_CONSENT_MODE = "STORE";
+    public static final String VIEW_CONSENT_MODE = "VIEW";
+    public static final String ONETIME_FETCH_TYPE = "ONETIME";
+    public static final String PERIODIC_FETCH_TYPE = "PERIODIC";
+    public static final String MONITORING_PURPOSE = "104";
+    public static final String ONETIME_PURPOSE = "105";
 
     public static final String AA_BASE_URL = "https://api-sandbox.onemoney.in/aa";
     public static final String AA_CONSENT_ARTEFACT_URI = "/Consent";
@@ -29,20 +28,4 @@ public class AaConstants {
 
     public static final String ERROR_IN_ARTEFACT_FETCH = "ERROR_IN_ARTEFACT_FETCH";
     public static final String ERROR_IN_CHANGING_CONSENT_STATUS = "ERROR_IN_ARTEFACT_FETCH";
-
-
-
-
-
-//    public static final List<String> consentTypes;
-//    public static final List<String> fiTypes;
-//    public static final DataConsumer dataConsumer;
-//    public static final List<DataFilter> dataFilter;
-//
-//    static {
-//        consentTypes = Arrays.asList("TRANSACTIONS", "PROFILE", "SUMMARY");
-//        fiTypes = Arrays.asList("GST_GSTR1");
-//        dataConsumer = new DataConsumer("GOL0134", "FIU");
-//        dataFilter = Arrays.asList(new DataFilter("TRANSACTIONAMOUNT", ">=", "20000"));
-//    }
 }

@@ -28,15 +28,36 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AAService {
 
-    private final FIFetchDetailRepo fIFetchDetailRepo;
+    private final ConsentRequestDetailRepo consentRequestDetailRepo;
     private final ConsentDetailRepo consentDetailRepo;
     private final DataFetchRequestDetailRepo dataFetchRequestDetailRepo;
-    private final ConsentRequestDetailRepo consentRequestDetailRepo;
+    private final FIFetchDetailRepo fIFetchDetailRepo;
 
+    private final List<IProcessConsentRequest> processConsentRequests;
     private final List<IProcessConsentNotification> processGeneratedConsentSvc;
     private final List<ICreateSessionForConsent> generateSessionForConsentSvc;
     private final List<IProcessGeneratedSession> processGeneratedSessionSvc;
-    private final List<IProcessConsentRequest> processConsentRequests;
+
+    public UISvcConsentResp createConsentRequest(UISvcConsentReq uiSvcConsentReq) {
+        log.info("Consent Request Processing started for aa: {} with refId: {} from UI Svc", uiSvcConsentReq.getAccAgg(), uiSvcConsentReq.getRefId());
+        ConsentRequestDetail consentRequestDetail = new ConsentRequestDetail();
+        consentRequestDetail.setId(UUID.randomUUID().toString());
+        consentRequestDetail.setCreatedDate(new Date());
+        consentRequestDetail.setRequestSrcRef(new ConsentRequestDetail.RequestSrcRef("UI-Svc", uiSvcConsentReq.getRefId()));
+        consentRequestDetail.setAccAgg(uiSvcConsentReq.getAccAgg());
+        consentRequestDetail.setUiSvcConsentReq(uiSvcConsentReq);
+        List<IProcessConsentRequest> sortedSvcs = processConsentRequests.stream().sorted(Comparator.comparingInt(IProcessConsentRequest::getExecutionSeq)).collect(Collectors.toList());
+        for (IProcessConsentRequest svc : sortedSvcs) {
+            Boolean result = svc.execute(consentRequestDetail);
+            if (!result) break;
+        }
+        consentRequestDetailRepo.save(consentRequestDetail);
+        log.info("Consent Request Completed for aa: {} with refId: {} from UI Svc", uiSvcConsentReq.getAccAgg(), uiSvcConsentReq.getRefId());
+        if (consentRequestDetail.getErrorInfo() == null)
+            return new UISvcConsentResp(uiSvcConsentReq.getRefId(), consentRequestDetail.getId(), consentRequestDetail.getConsentHandleId(), "SUCCESS", null);
+        else
+            return new UISvcConsentResp(uiSvcConsentReq.getRefId(), consentRequestDetail.getId(), consentRequestDetail.getConsentHandleId(), "ERROR", new ErrorInfo("1", "Internal Server Error!! Check AA server logs... "));
+    }
 
     public void processConsentNotification(ConsentNotification consentNotification) {
         log.info("Processing Started for Consent Notification: {}", consentNotification);
@@ -53,13 +74,14 @@ public class AAService {
         ConsentDetail consentDetail = new ConsentDetail();
         consentDetail.setRequestId(null);
         consentDetail.setConsentId(consentId);
+        consentDetail.setStatus(status);
         consentDetail.setDataManager(new DataManager(dataManagerType, dataManagerName));
         List<IProcessConsentNotification> sortedSvc = processGeneratedConsentSvc.stream().sorted(Comparator.comparingInt(IProcessConsentNotification::getExecutionSeq)).collect(Collectors.toList());
         for (IProcessConsentNotification processGeneratedConsent : sortedSvc) {
             Boolean result = processGeneratedConsent.execute(consentDetail);
             if (!result) break;
         }
-        if (consentDetail.getErrorInfo() != null) {
+        if (consentDetail.getErrorInfo() == null) {
             ConsentArtefact consentArtefact = consentDetail.getConsentArtefact();
             if (consentArtefact.getStatus().equals("ACTIVE") && consentArtefact.getConsentDetail().getPurpose().getCode().equals("105") && consentArtefact.getConsentUse().getCount() == 0) {
                 createSession(consentDetail);
@@ -89,6 +111,7 @@ public class AAService {
         String sessionId = fiNotification.getFIStatusNotification().getSessionId();
         DataManager dataManager = new DataManager(fiNotification.getNotifier().getType(), fiNotification.getNotifier().getId());
         FIFetchDetail fiFetchDetail = new FIFetchDetail();
+        fiFetchDetail.setId(UUID.randomUUID().toString());
         fiFetchDetail.setRequestId(null);
         fiFetchDetail.setConsentId(null);
         fiFetchDetail.setSessionId(sessionId);
@@ -98,25 +121,8 @@ public class AAService {
             Boolean result = svc.execute(fiFetchDetail);
             if (!result) break;
         }
-        fiFetchDetail.setId(UUID.randomUUID().toString());
+        fiFetchDetail.setCreatedDate(new Date());
         fIFetchDetailRepo.save(fiFetchDetail);
         log.info("Completed Data Fetch for session: {}", sessionId);
-    }
-
-    public ConsentResp createConsentRequest(UiConsentReq uiConsentReq) {
-        log.info("Started Consent Creation for user: {}", uiConsentReq.getEmail());
-        ConsentRequestDetail consentRequestDetail = new ConsentRequestDetail();
-        consentRequestDetail.setId(UUID.randomUUID().toString());
-        consentRequestDetail.setRequestAlias(uiConsentReq.getRequestAlias());
-        consentRequestDetail.setCreatedDate(new Date());
-        consentRequestDetail.setUiConsentReq(uiConsentReq);
-        List<IProcessConsentRequest> sortedSvcs = processConsentRequests.stream().sorted(Comparator.comparingInt(IProcessConsentRequest::getExecutionSeq)).collect(Collectors.toList());
-        for (IProcessConsentRequest svc : sortedSvcs) {
-            Boolean result = svc.execute(consentRequestDetail);
-            if (!result) break;
-        }
-        consentRequestDetailRepo.save(consentRequestDetail);
-        log.info("Completed Consent Creation for user: {}", uiConsentReq.getEmail());
-        return consentRequestDetail.getConsentResp();
     }
 }
