@@ -10,7 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import static com.technocrats.aa.constants.AaConstants.ERROR_IN_ARTEFACT_FETCH;
@@ -18,9 +20,9 @@ import static com.technocrats.aa.constants.AaConstants.ERROR_IN_ARTEFACT_FETCH;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class HandleReadyConsent implements IProcessConsentNotification {
+public class HandleReadyOrActiveConsent implements IProcessConsentNotification {
 
-    private static final String STATUS = "READY";
+    private static final List<String> STATUSES = Arrays.asList("READY", "ACTIVE");
 
     private final AAClientSvc aaClientSvc;
     private final ConsentDetailRepo consentDetailRepo;
@@ -33,7 +35,7 @@ public class HandleReadyConsent implements IProcessConsentNotification {
     @Override
     public Boolean execute(ConsentDetail consentDetail) {
         // if the current status is not equal to handler status, simply pass on.
-        if (!consentDetail.getStatus().equals(STATUS))
+        if (!STATUSES.contains(consentDetail.getStatus()))
             return true;
         try {
             ConsentArtefact consentArtefact = aaClientSvc.fetchArtefact(consentDetail.getConsentId());
