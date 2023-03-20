@@ -81,7 +81,7 @@ public class AAService {
             Boolean result = processGeneratedConsent.execute(consentDetail);
             if (!result) break;
         }
-        if (consentDetail.getErrorInfo() == null) {
+        if (consentDetail.getErrorInfo() == null && consentDetail.getStatus().equals("ACTIVE")) {
             ConsentArtefact consentArtefact = consentDetail.getConsentArtefact();
             if (consentArtefact.getStatus().equals("ACTIVE") && consentArtefact.getConsentDetail().getPurpose().getCode().equals("105") && consentArtefact.getConsentUse().getCount() == 0) {
                 createSession(consentDetail);
