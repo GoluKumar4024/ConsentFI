@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Slf4j
@@ -43,11 +44,11 @@ public class AAController {
 
     public void logConsentNotification(ConsentNotification consentNotification) {
         log.info("The Consent Notification Received: {}", consentNotification);
-        consentNotificationDetailRepo.save(new ConsentNotificationDetail(UUID.randomUUID().toString(), consentNotification));
+        consentNotificationDetailRepo.save(new ConsentNotificationDetail(UUID.randomUUID().toString(), new Date(), consentNotification));
     }
 
     public void logFINotification(FINotification fiNotification) {
         log.info("The Session Notification Received: {}", fiNotification);
-        fiNotificationDetailRepo.save(new FINotificationDetail(UUID.randomUUID().toString(), fiNotification));
+        fiNotificationDetailRepo.save(new FINotificationDetail(UUID.randomUUID().toString(), new Date(), fiNotification));
     }
 }

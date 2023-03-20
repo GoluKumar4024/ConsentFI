@@ -7,12 +7,17 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document
+@Document(value = "FINotificationDetail")
 public class FINotificationDetail {
     @Id
     private String id;
+
+    private Date createdDate;
+
     private FINotification fiNotification;
 }

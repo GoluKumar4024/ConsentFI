@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,6 +32,8 @@ public class DataFetchRequestDetail {
     private String localPrivateKey;
 
     private SessionDetails sessionDetails;
+
+    private Date createdDate;
 
     private ErrorInfo errorInfo;
 

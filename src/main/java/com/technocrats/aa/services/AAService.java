@@ -96,6 +96,7 @@ public class AAService {
         dataFetchRequestDetail.setRequestId(null);
         dataFetchRequestDetail.setConsentId(consentDetail.getConsentId());
         dataFetchRequestDetail.setAccAgg(consentDetail.getDataManager());
+        dataFetchRequestDetail.setCreatedDate(new Date());
         List<ICreateSessionForConsent> sortedSvcs = generateSessionForConsentSvc.stream().sorted(Comparator.comparingInt(ICreateSessionForConsent::getExecutionSeq)).collect(Collectors.toList());
         for (ICreateSessionForConsent svc : sortedSvcs) {
             Boolean result = svc.execute(dataFetchRequestDetail);
