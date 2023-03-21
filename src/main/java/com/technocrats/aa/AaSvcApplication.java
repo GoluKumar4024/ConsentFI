@@ -12,7 +12,7 @@ import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 
 @SpringBootApplication(exclude = {WebFluxAutoConfiguration.class})
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class AaSvcApplication {
 
 	public static void main(String[] args) {

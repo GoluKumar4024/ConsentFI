@@ -6,8 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import static com.technocrats.aa.constants.AaConstants.AA_BASE_URL;
-import static com.technocrats.aa.constants.AaConstants.RAHASYA_BASE_URL;
+import static com.technocrats.aa.constants.AaConstants.*;
 
 @Configuration
 public class ClientConfig {
@@ -15,9 +14,9 @@ public class ClientConfig {
     @Bean
     public WebClient webClientAA() {
         return WebClient.builder()
-                .baseUrl(AA_BASE_URL)
+                .baseUrl(API_GATEWAY_SVC_URL + AA_SANDBOX_URI)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .defaultHeader("client_api_key", System.getProperty("CLIENT_API_KEY"))
+                .defaultHeader("client_api_key", System.getProperty(CLIENT_API_KEY_KEY))
                 .build();
     }
 
