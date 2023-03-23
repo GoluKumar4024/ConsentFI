@@ -1,6 +1,5 @@
 package com.technocrats.aa.controllers;
 
-import com.technocrats.aa.dtos.ConsentResp;
 import com.technocrats.aa.dtos.UISvcConsentReq;
 import com.technocrats.aa.dtos.UISvcConsentResp;
 import com.technocrats.aa.services.AAService;

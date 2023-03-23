@@ -42,7 +42,7 @@ public class SendFIDataRequest implements ICreateSessionForConsent {
         } catch (Exception ex) {
             String errorMessage = String.format("Error in Sending the Data Fetch Request: %s", ex.getMessage());
             log.error(errorMessage);
-            dataFetchRequestDetail.setErrorInfo(new ErrorInfo("ERROR IN SENDING DATA FETCH REQUEST", errorMessage));
+            dataFetchRequestDetail.setErrorInfo(new ErrorInfo("ERROR_IN_SENDING_DATA_FETCH_REQUEST", errorMessage));
             return false;
         }
     }

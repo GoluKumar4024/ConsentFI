@@ -37,7 +37,6 @@ public class AAController {
     @PostMapping("/FI/Notification")
     public FINotificationResp processSession(@RequestBody FINotification fiNotification) {
         logFINotification(fiNotification);
-        String sessionId = fiNotification.getFIStatusNotification().getSessionId();
         aaService.fetchFIData(fiNotification);
         return new FINotificationResp(fiNotification.getVer(), fiNotification.getTimestamp(), fiNotification.getTxnid(), "OK");
     }

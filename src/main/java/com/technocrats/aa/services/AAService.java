@@ -1,5 +1,6 @@
 package com.technocrats.aa.services;
 
+import com.technocrats.aa.constants.AaConstants;
 import com.technocrats.aa.dtos.*;
 import com.technocrats.aa.model.ConsentDetail;
 import com.technocrats.aa.model.ConsentRequestDetail;
@@ -83,7 +84,7 @@ public class AAService {
         }
         if (consentDetail.getErrorInfo() == null && consentDetail.getStatus().equals("ACTIVE")) {
             ConsentArtefact consentArtefact = consentDetail.getConsentArtefact();
-            if (consentArtefact.getStatus().equals("ACTIVE") && consentArtefact.getConsentDetail().getPurpose().getCode().equals("105") && consentArtefact.getConsentUse().getCount() == 0) {
+            if (consentArtefact.getStatus().equals("ACTIVE") && consentArtefact.getConsentDetail().getPurpose().getCode().equals(AaConstants.ONETIME_PURPOSE) && (consentArtefact.getConsentUse().getCount() == 0)) {
                 createSession(consentDetail);
             }
         }
@@ -108,7 +109,7 @@ public class AAService {
     }
 
     public void fetchFIData(FINotification fiNotification) {
-        log.info("Started FI Fetch for Session: {}", fiNotification);
+        log.info("Started FI Fetch for Session Notification: {}", fiNotification);
         String sessionId = fiNotification.getFIStatusNotification().getSessionId();
         DataManager dataManager = new DataManager(fiNotification.getNotifier().getType(), fiNotification.getNotifier().getId());
         FIFetchDetail fiFetchDetail = new FIFetchDetail();

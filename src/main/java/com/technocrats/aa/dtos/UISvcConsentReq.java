@@ -14,6 +14,8 @@ public class UISvcConsentReq {
 
     private DataManager accAgg;
 
+    private AAProfile aaProfile;
+
     private ConsentReq consentReq;
 
     @Data

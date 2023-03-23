@@ -13,6 +13,9 @@ public interface DataFetchRequestDetailRepo extends MongoRepository<DataFetchReq
     @Query("{$and: [{'errorInfo': {$exists: false}}, {'sessionDetails.sessionId': {$eq: ?0}}]}")
     DataFetchRequestDetail findBySessionDetailsSessionId(String sessionId);
 
+    @Query("{$and: [{'errorInfo': {$exists: false}}, {'sessionDetails.sessionId': {$eq: ?0}} , {'accAgg.name': {$eq: ?1}}]}")
+    DataFetchRequestDetail findBySessionDetailsSessionIdAndDataManager(String sessionId, String dataManagerName);
+
     @Query("{$and: [ {'errorInfo': {$exists: false}}, { $or: [{'consentId': {$exists: false}}, {'requestId': {$exists: false}}] } ]}")
     List<DataFetchRequestDetail> findByConsentIdNullOrRequestIdNullOrBoth();
 }

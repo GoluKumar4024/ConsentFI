@@ -31,7 +31,8 @@ public class DecryptFIData implements IProcessGeneratedSession {
         try {
             String sessionId = fiFetchDetail.getSessionId();
             log.info("Started Decryption of FI Data for session: {}", sessionId);
-            DataFetchRequestDetail dataFetchRequestDetail = dataFetchRequestDetailRepo.findBySessionDetailsSessionId(sessionId);
+            DataFetchRequestDetail dataFetchRequestDetail = dataFetchRequestDetailRepo.findBySessionDetailsSessionIdAndDataManager(sessionId, fiFetchDetail.getAccAgg().getName());
+            // findBySessionDetailsSessionId(sessionId);
             KeyMaterialWithNonce localKeyMaterialWithNonce = dataFetchRequestDetail.getLocalKeyMaterialWithNonce();
             String localNonce = localKeyMaterialWithNonce.getNonce();
             String localPrivateKey = dataFetchRequestDetail.getLocalPrivateKey();
@@ -52,7 +53,7 @@ public class DecryptFIData implements IProcessGeneratedSession {
         } catch (Exception ex) {
             String errorMessage = String.format("Error in Decrypting the Fi Data: %s", ex.getMessage());
             log.error(errorMessage);
-            fiFetchDetail.setErrorInfo(new ErrorInfo("ERROR IN DECRYPTION OF FI", errorMessage));
+            fiFetchDetail.setErrorInfo(new ErrorInfo("ERROR_IN_DECRYPTION_OF_FI", errorMessage));
             return false;
         }
     }

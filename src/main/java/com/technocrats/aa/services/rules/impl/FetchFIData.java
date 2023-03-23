@@ -32,7 +32,7 @@ public class FetchFIData implements IProcessGeneratedSession {
         } catch (Exception ex) {
             String errorMessage = String.format("Error in Fetching the Financial Data: %s", ex.getMessage());
             log.error(errorMessage);
-            fiFetchDetail.setErrorInfo(new ErrorInfo("ERROR IN FETCHING FI DATA", errorMessage));
+            fiFetchDetail.setErrorInfo(new ErrorInfo("ERROR_IN_FETCHING_FI_DATA", errorMessage));
             return false;
         }
     }
