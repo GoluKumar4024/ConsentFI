@@ -29,7 +29,7 @@ public class AaConstants {
     public static final String ERROR_IN_ARTEFACT_FETCH = "ERROR_IN_ARTEFACT_FETCH";
     public static final String ERROR_IN_CHANGING_CONSENT_STATUS = "ERROR_IN_ARTEFACT_FETCH";
 
-    public static final String API_GATEWAY_SVC_URL = "http://localhost:9090";
-    public static final String AA_SANDBOX_URI = "/aa";
+//    public static final String API_GATEWAY_SVC_URL = "http://localhost:9090";
+//    public static final String AA_SANDBOX_URI = "/aa";
     public static final String CLIENT_API_KEY_KEY = "CLIENT_API_KEY";
 }

@@ -14,7 +14,7 @@ public class ClientConfig {
     @Bean
     public WebClient webClientAA() {
         return WebClient.builder()
-                .baseUrl(API_GATEWAY_SVC_URL + AA_SANDBOX_URI)
+                .baseUrl(AA_BASE_URL)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultHeader("client_api_key", System.getProperty(CLIENT_API_KEY_KEY))
                 .build();
