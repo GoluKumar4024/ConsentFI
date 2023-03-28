@@ -29,7 +29,6 @@ public class WatcherJobConfig {
 
 
     @Scheduled(fixedDelay = 1000)
-    @Async
     public void updateConsentIdsForPendingConsentRequests() {
         List<ConsentRequestDetail> requestWithPendingDetails = consentRequestDetailRepo.findRequestWithPendingConsentApproval();
         for (ConsentRequestDetail request : requestWithPendingDetails) {
@@ -46,7 +45,6 @@ public class WatcherJobConfig {
     }
 
     @Scheduled(fixedDelay = 1000)
-    @Async
     public void updateConsentArtefactWithRequestId() {
         List<ConsentDetail> consentArtefactDetailList = consentDetailRepo.findAllArtefactsWithAbsentRequestId();
         for (ConsentDetail consentArtefactDetail : consentArtefactDetailList) {
@@ -60,7 +58,6 @@ public class WatcherJobConfig {
 
 
     @Scheduled(fixedDelay = 1000)
-    @Async
     public void updateDataFetchRequestDetailWithRequestId() {
         List<DataFetchRequestDetail> dataFetchRequestDetailList = dataFetchRequestDetailRepo.findByConsentIdNullOrRequestIdNullOrBoth();
         for (DataFetchRequestDetail dataFetchRequestDetail : dataFetchRequestDetailList) {
@@ -73,7 +70,6 @@ public class WatcherJobConfig {
     }
 
     @Scheduled(fixedDelay = 1000)
-    @Async
     public void updateFIFetchDetailsWithRequestIdAndConsentId() {
         List<FIFetchDetail> fiFetchDetails = fiFetchDetailRepo.findByConsentIdOrRequestIdOrBothNull();
         for (FIFetchDetail fiFetchDetail : fiFetchDetails) {
@@ -86,6 +82,8 @@ public class WatcherJobConfig {
             }
         }
     }
+
+    // https://aa-sandbox.onemoney.in?redirect=http://example.com&mobile=8578983711&customername=Golu%20Kumar&consenthandle=66cf304f-0012-49fc-941c-90b052ec195e&txnid=0ebf4904-e25c-4f1e-af88-8771f26fd018&sessionid=54cbe9ba-5a96-4dde-8623-6a50f362bbd8&srcref=GOL0134
 
 //requestid - 3a1f0896-3020-4b86-b5d4-e5683f326f83
 //consentid - 843620c1-1366-4f84-b1ab-905ee000dbc7
