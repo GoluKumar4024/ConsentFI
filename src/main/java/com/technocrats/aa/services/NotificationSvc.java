@@ -11,8 +11,13 @@ import com.technocrats.aa.repo.NotificationTokensRepo;
 import com.technocrats.aa.repo.UserConsentRequestsRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -24,6 +29,7 @@ public class NotificationSvc {
     private final ConsentRequestDetailRepo consentRequestDetailRepo;
     private final UserConsentRequestsRepo userConsentRequestsRepo;
     private final NotificationTokensRepo notificationTokensRepo;
+    private final MongoTemplate mongoTemplate;
 
     public void sendNotificationForInvoiceFetch(String requestId) {
         ConsentRequestDetail detail = consentRequestDetailRepo.findByRequestId(requestId);
@@ -55,26 +61,44 @@ public class NotificationSvc {
         ConsentRequestDetail detail = consentRequestDetailRepo.findByRequestId(requestId);
         if (detail != null) {
             String refId = detail.getRequestSrcRef().getRefId();
+            List<String> tokens = findUserTokensForConsentStatus(refId, purposeCode);
+            tokens.forEach((token) -> {
+                Notification notification = Notification
+                        .builder().setTitle("Consent Status Update!!")
+                        .setBody(String.format("Consent status is updated with status: %s for request id: %s for purpose: %s", status, requestId, purposeCode))
+                        .build();
+                Message message = Message.builder()
+                        .setToken(token)
+                        .setNotification(notification)
+                        .build();
+                try {
+                    firebaseMessaging.send(message);
+                } catch (FirebaseMessagingException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
+
+    public List<String> findUserTokensForConsentStatus(String refId, String purposeCode) {
+        List<String> tokens = new ArrayList<>();
+        if (purposeCode.equals("104")) {
+            // search in GenerateOfferDetail Collection
+            Query query = new Query();
+            query.addCriteria(Criteria.where("uiSvcConsentReq.refId").is(refId));
+            query.fields().include("offerReq.userDetail.emailId");
+            String email = mongoTemplate.findOne(query, String.class, "GenerateOfferDetail");
+            if (email != null) {
+                tokens = notificationTokensRepo.findByEmailId(email).getTokenIds();
+            }
+        } else if (purposeCode.equals("105")) {
+            // Search in UserConsentRequests
             UserConsentRequests userConsentRequests = userConsentRequestsRepo.findByRefId(refId);
             if (userConsentRequests != null) {
-                List<String> tokens = notificationTokensRepo.findByEmailId(userConsentRequests.getUserEmailId()).getTokenIds();
-                tokens.forEach((token) -> {
-                    Notification notification = Notification
-                            .builder().setTitle("Consent Status Update!!")
-                            .setBody(String.format("Consent status is updated with status: %s for request id: %s for purpose: %s", status, requestId, purposeCode))
-                            .build();
-                    Message message = Message.builder()
-                            .setToken(token)
-                            .setNotification(notification)
-                            .build();
-                    try {
-                        firebaseMessaging.send(message);
-                    } catch (FirebaseMessagingException e) {
-                        e.printStackTrace();
-                    }
-                });
+                tokens = notificationTokensRepo.findByEmailId(userConsentRequests.getUserEmailId()).getTokenIds();
             }
         }
+        return tokens;
     }
 
 }
