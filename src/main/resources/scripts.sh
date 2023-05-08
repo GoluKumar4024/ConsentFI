@@ -12,10 +12,18 @@ docker stop ui-svc
 docker stop aa-svc
 docker stop rahasya-svc
 docker stop api-gateway-svc
-
-remove-all-images.sh
-
 docker rm ui-svc
 docker rm aa-svc
 docker rm rahasya-svc
 docker rm api-gateway-svc
+
+
+remove-all-images.sh
+
+
+test1@gmail.com
+password1
+firstname1
+lastname2
+
+

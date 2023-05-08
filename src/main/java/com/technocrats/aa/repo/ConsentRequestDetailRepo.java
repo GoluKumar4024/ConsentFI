@@ -15,6 +15,9 @@ public interface ConsentRequestDetailRepo extends MongoRepository<ConsentRequest
 
     ConsentRequestDetail findByConsentHandleStatusId(String consentId);
 
+    @Query(value = "{$and: [{'id': {$eq: ?0}}, {'errorInfo': {$exists: false}}]}")
+    ConsentRequestDetail findByRequestId(String requestId);
+
 
 
 }

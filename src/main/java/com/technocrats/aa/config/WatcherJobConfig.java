@@ -8,6 +8,7 @@ import com.technocrats.aa.model.DataFetchRequestDetail;
 import com.technocrats.aa.model.FIFetchDetail;
 import com.technocrats.aa.repo.*;
 import com.technocrats.aa.services.AAClientSvc;
+import com.technocrats.aa.services.NotificationSvc;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Async;
@@ -26,7 +27,7 @@ public class WatcherJobConfig {
     private final ConsentDetailRepo consentDetailRepo;
     private final DataFetchRequestDetailRepo dataFetchRequestDetailRepo;
     private final FIFetchDetailRepo fiFetchDetailRepo;
-
+    private final NotificationSvc notificationSvc;
 
     @Scheduled(fixedDelay = 1000)
     public void updateConsentIdsForPendingConsentRequests() {
@@ -45,17 +46,20 @@ public class WatcherJobConfig {
     }
 
     @Scheduled(fixedDelay = 1000)
-    public void updateConsentArtefactWithRequestId() {
+    public void updateRequestIdsForFetchedConsentArtefacts() {
         List<ConsentDetail> consentArtefactDetailList = consentDetailRepo.findAllArtefactsWithAbsentRequestId();
         for (ConsentDetail consentArtefactDetail : consentArtefactDetailList) {
             ConsentRequestDetail consentRequestDetail = consentRequestDetailRepo.findByConsentHandleStatusId(consentArtefactDetail.getConsentId());
             if (consentRequestDetail != null) {
                 consentArtefactDetail.setRequestId(consentRequestDetail.getId());
                 consentDetailRepo.save(consentArtefactDetail);
+                // check for the purpose and status
+                String purposeCode = consentArtefactDetail.getConsentArtefact().getConsentDetail().getPurpose().getCode();
+                String status = consentArtefactDetail.getConsentArtefact().getStatus();
+                notificationSvc.sendNotificationForConsentStatus(consentArtefactDetail.getRequestId(), purposeCode, status);
             }
         }
     }
-
 
     @Scheduled(fixedDelay = 1000)
     public void updateDataFetchRequestDetailWithRequestId() {
@@ -79,13 +83,10 @@ public class WatcherJobConfig {
                 fiFetchDetail.setRequestId(dataFetchRequestDetail.getRequestId());
                 fiFetchDetail.setConsentId(dataFetchRequestDetail.getConsentId());
                 fiFetchDetailRepo.save(fiFetchDetail);
+                // now as the request id is set, we need to send the notification now.
+                notificationSvc.sendNotificationForInvoiceFetch(fiFetchDetail.getRequestId());
             }
         }
     }
-
-    // https://aa-sandbox.onemoney.in?redirect=http://example.com&mobile=8578983711&customername=Golu%20Kumar&consenthandle=66cf304f-0012-49fc-941c-90b052ec195e&txnid=0ebf4904-e25c-4f1e-af88-8771f26fd018&sessionid=54cbe9ba-5a96-4dde-8623-6a50f362bbd8&srcref=GOL0134
-
-//requestid - 3a1f0896-3020-4b86-b5d4-e5683f326f83
-//consentid - 843620c1-1366-4f84-b1ab-905ee000dbc7
 
 }

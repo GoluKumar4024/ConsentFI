@@ -32,4 +32,8 @@ public class AaConstants {
 //    public static final String API_GATEWAY_SVC_URL = "http://localhost:9090";
 //    public static final String AA_SANDBOX_URI = "/aa";
     public static final String CLIENT_API_KEY_KEY = "CLIENT_API_KEY";
+
+    public static final String NOTIF_FOR_ONETIME_CONSENT = "NOTIF_FOR_ONETIME";
+    public static final String NOTIF_FOR_MONITORING_CONSENT = "NOTIF_FOR_MONITORING";
+    public static final String NOTIF_FOR_FETCHED_INVOICES = "NOTIF_FOR_INVOICE";
 }
