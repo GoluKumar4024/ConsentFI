@@ -1,5 +1,7 @@
 package com.technocrats.aa.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
@@ -30,6 +32,7 @@ public class NotificationSvc {
     private final UserConsentRequestsRepo userConsentRequestsRepo;
     private final NotificationTokensRepo notificationTokensRepo;
     private final MongoTemplate mongoTemplate;
+    private final ObjectMapper objectMapper;
 
     public void sendNotificationForInvoiceFetch(String requestId) {
         ConsentRequestDetail detail = consentRequestDetailRepo.findByRequestId(requestId);
@@ -60,34 +63,40 @@ public class NotificationSvc {
     public void sendNotificationForConsentStatus(String requestId, String purposeCode, String status) {
         ConsentRequestDetail detail = consentRequestDetailRepo.findByRequestId(requestId);
         if (detail != null) {
-            String refId = detail.getRequestSrcRef().getRefId();
-            List<String> tokens = findUserTokensForConsentStatus(refId, purposeCode);
-            tokens.forEach((token) -> {
-                Notification notification = Notification
-                        .builder().setTitle("Consent Status Update!!")
-                        .setBody(String.format("Consent status is updated with status: %s for request id: %s for purpose: %s", status, requestId, purposeCode))
-                        .build();
-                Message message = Message.builder()
-                        .setToken(token)
-                        .setNotification(notification)
-                        .build();
-                try {
-                    firebaseMessaging.send(message);
-                } catch (FirebaseMessagingException e) {
-                    e.printStackTrace();
-                }
-            });
+            try {
+                String refId = detail.getRequestSrcRef().getRefId();
+                List<String> tokens = findUserTokensForConsentStatus(refId, purposeCode);
+                tokens.forEach((token) -> {
+                    Notification notification = Notification
+                            .builder().setTitle("Consent Status Update!!")
+                            .setBody(String.format("Consent status is updated with status: %s for request id: %s for purpose: %s", status, requestId, purposeCode))
+                            .build();
+                    Message message = Message.builder()
+                            .setToken(token)
+                            .setNotification(notification)
+                            .build();
+                    try {
+                        firebaseMessaging.send(message);
+                    } catch (FirebaseMessagingException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public List<String> findUserTokensForConsentStatus(String refId, String purposeCode) {
+    public List<String> findUserTokensForConsentStatus(String refId, String purposeCode) throws JsonProcessingException {
         List<String> tokens = new ArrayList<>();
         if (purposeCode.equals("104")) {
             // search in GenerateOfferDetail Collection
             Query query = new Query();
             query.addCriteria(Criteria.where("uiSvcConsentReq.refId").is(refId));
             query.fields().include("offerReq.userDetail.emailId");
-            String email = mongoTemplate.findOne(query, String.class, "GenerateOfferDetail");
+            String result = mongoTemplate.findOne(query, String.class, "GenerateOfferDetail");
+            String email = objectMapper.readTree(result).get("offerReq").get("userDetail").get("emailId").asText();
             if (email != null) {
                 tokens = notificationTokensRepo.findByEmailId(email).getTokenIds();
             }
