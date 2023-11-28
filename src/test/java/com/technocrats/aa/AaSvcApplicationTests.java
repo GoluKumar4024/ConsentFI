@@ -1,6 +1,6 @@
 package com.technocrats.aa;
 
-import com.technocrats.aa.model.ConsentArtefactDetail;
+//import com.technocrats.aa.model.ConsentArtefactDetail;
 import com.technocrats.aa.repo.ConsentDetailRepo;
 import com.technocrats.aa.repo.ConsentRequestDetailRepo;
 import com.technocrats.aa.services.AAService;
