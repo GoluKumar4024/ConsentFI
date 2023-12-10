@@ -1,4 +1,4 @@
-# ConsentiFI - An Account Aggregator Client
+# ConsentFI - An Account Aggregator Client
 
 This repository contains an Account Aggregator (AA) Client designed to interact seamlessly with the Onemoney AA Sandbox and Sahmati's Encryption/Decryption service, also known as Rahasya.
 
